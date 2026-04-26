@@ -88,6 +88,8 @@ jobs:
         with:
           context: ./assignment_4-level-2-backend-
           file: ./assignment_4-level-2-backend-/Dockerfile
+          build-args: |
+            DATABASE_URL=${{ secrets.DATABASE_URL }}
           push: true
           tags: |
             docker.io/${{ steps.vars.outputs.namespace }}/ph-server:latest
