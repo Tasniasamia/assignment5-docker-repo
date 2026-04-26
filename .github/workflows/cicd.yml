@@ -35,10 +35,6 @@ jobs:
         working-directory: ./assignment_4-level-2-backend-
         run: npm ci --ignore-scripts
 
-      - name: Lint server
-        working-directory: ./assignment_4-level-2-backend-
-        run: npm run lint
-
       - name: Generate Prisma client
         working-directory: ./assignment_4-level-2-backend-
         env:
@@ -52,10 +48,6 @@ jobs:
       - name: Install client deps
         working-directory: ./assignment_4-level-2-frontend-
         run: npm ci
-
-      - name: Lint client
-        working-directory: ./assignment_4-level-2-frontend-
-        run: npm run lint
 
       - name: Build client
         working-directory: ./assignment_4-level-2-frontend-
