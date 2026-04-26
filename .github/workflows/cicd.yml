@@ -157,7 +157,9 @@ jobs:
 
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login docker.io -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
+          
             docker compose -f docker-compose.yml pull
             docker compose -f docker-compose.yml up -d ph-db
+            docker compose -f docker-compose.yml run --rm ph-server sh -c "npx prisma migrate deploy"
             docker compose -f docker-compose.yml up -d ph-server ph-client
             docker image prune -f
