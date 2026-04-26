@@ -1,0 +1,52 @@
+services:
+  ph-db:
+    image: postgres:16-alpine
+    container_name: ph-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: foodhub
+    volumes:
+      - ph-pg-data:/var/lib/postgresql/data
+    networks:
+      - ph-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d foodhub"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  ph-server:
+    image: ${REGISTRY}/${IMAGE_NAMESPACE}/foodhub-server:${IMAGE_TAG}
+    container_name: ph-server
+    restart: unless-stopped
+    env_file:
+      - ./assignment_4-level-2-backend-/.env
+    depends_on:
+      ph-db:
+        condition: service_healthy
+    networks:
+      - ph-net
+    ports:
+      - "127.0.0.1:5750:5750"
+
+  ph-client:
+    image: ${REGISTRY}/${IMAGE_NAMESPACE}/foodhub-client:${IMAGE_TAG}
+    container_name: ph-client
+    restart: unless-stopped
+    env_file:
+      - ./assignment_4-level-2-frontend-/.env
+    depends_on:
+      - ph-server
+    networks:
+      - ph-net
+    ports:
+      - "127.0.0.1:3000:3000"
+
+networks:
+  ph-net:
+    driver: bridge
+
+volumes:
+  ph-pg-data:
