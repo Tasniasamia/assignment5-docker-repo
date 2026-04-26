@@ -35,8 +35,7 @@ services:
     image: ${REGISTRY}/${IMAGE_NAMESPACE}/ph-client:${IMAGE_TAG}
     container_name: ph-client
     restart: unless-stopped
-    env_file:
-      - ./assignment_4-level-2-frontend-/.env
+  
     depends_on:
       - ph-server
     networks:
