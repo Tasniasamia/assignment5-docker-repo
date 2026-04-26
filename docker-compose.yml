@@ -18,7 +18,7 @@ services:
       retries: 10
 
   ph-server:
-    image: ${REGISTRY}/${IMAGE_NAMESPACE}/foodhub-server:${IMAGE_TAG}
+    image: ${REGISTRY}/${IMAGE_NAMESPACE}/ph-server:${IMAGE_TAG}
     container_name: ph-server
     restart: unless-stopped
     env_file:
@@ -32,7 +32,7 @@ services:
       - "127.0.0.1:5750:5750"
 
   ph-client:
-    image: ${REGISTRY}/${IMAGE_NAMESPACE}/foodhub-client:${IMAGE_TAG}
+    image: ${REGISTRY}/${IMAGE_NAMESPACE}/ph-client:${IMAGE_TAG}
     container_name: ph-client
     restart: unless-stopped
     env_file:
