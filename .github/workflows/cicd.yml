@@ -39,7 +39,7 @@ jobs:
         working-directory: ./assignment_4-level-2-backend-
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npm run generate
+        run: npx prisma generate
 
       - name: Build server
         working-directory: ./assignment_4-level-2-backend-
