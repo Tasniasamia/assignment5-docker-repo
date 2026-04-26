@@ -54,7 +54,7 @@ jobs:
       - name: Build client
         working-directory: ./assignment_4-level-2-frontend-
         env:
-          NEXT_PUBLIC_API_BASE_URL: ${{ secrets.CLIENT_PUBLIC_API_BASE_URL }}
+          BACKEND_URL: ${{ secrets.BACKEND_URL }}
         run: npm run build
 
   docker:
@@ -99,7 +99,7 @@ jobs:
           context: ./assignment_4-level-2-frontend-
           file: ./assignment_4-level-2-frontend-/Dockerfile
           build-args: |
-            NEXT_PUBLIC_API_BASE_URL=${{ secrets.CLIENT_PUBLIC_API_BASE_URL }}
+            BACKEND_URL=${{ secrets.BACKEND_URL }}
           push: true
           tags: |
             docker.io/${{ steps.vars.outputs.namespace }}/ph-client:latest
