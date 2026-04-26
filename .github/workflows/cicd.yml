@@ -49,7 +49,7 @@ jobs:
 
       - name: Install client deps
         working-directory: ./assignment_4-level-2-frontend-
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Build client
         working-directory: ./assignment_4-level-2-frontend-
